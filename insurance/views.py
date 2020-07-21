@@ -13,18 +13,26 @@ def monthly_payment(s, g, n):
    P = int(s) * (i + (i / (((1 + i) ** n) - 1)))
    return (P)
 
+def numrus (x):
+    z = int((float(x) % 1)*100 // 1)
+    y = float(x) // 1
+    p = '{0:,}'.format(int(y)).replace(',', ' ')
+    px = str(p) + ',' + str(z)
+    return(px)
+
 def calculatecredit(request):
-    s = request.GET['creditAmount']
-    ins = request.GET['insuranceAmount']
-    grate = request.GET['annualRate']
+    s = int(request.GET['creditAmount'])
+    ins = int(request.GET['insuranceAmount'])
+    grate = int(request.GET['annualRate'])
     n = int(request.GET['creditTerm'])
     for k in range(1, 100, 1):
         var1 = monthly_payment((int(s) + int(ins)), grate, n)
         var2 = monthly_payment(s, k, n)
         if var2 >= var1:
             annualRateIns = str(k)
-            monthlyPayment = str(float("{0:.1f}".format(var1)))
+            monthlyPayment = str(numrus(float("{0:.1f}".format(var1))))
             overpayment = (monthly_payment((int(s) + int(ins)), grate, n) * n) - int(s)
-            overpaymentStr = str(float("{0:.1f}".format(overpayment)))
-            return render(request, 'insurance/creditcal.html', {'annualRateIns': annualRateIns, 'monthlyPayment' : monthlyPayment, 'overpaymentStr' : overpaymentStr})
+            overpaymentStr = str(numrus(float("{0:.1f}".format(overpayment))))
+            overpaymentPercent = str(int(overpayment / s * 100))
+            return render(request, 'insurance/creditcal.html', {'annualRateIns': annualRateIns, 'monthlyPayment' : monthlyPayment, 'overpaymentStr' : overpaymentStr, 'overpaymentPercent' : overpaymentPercent})
             #return HttpResponse('Процент кредита:' + annualRateIns + 'Ежемесячный процент:' + monthlyPayment + 'Переплата:' +overpayment)

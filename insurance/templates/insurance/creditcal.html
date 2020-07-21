@@ -19,15 +19,19 @@
                         <form method="GET" action="{% url 'calculatecredit' %}">
                             <div class="form-group">
                                 <label for="creditAmount">Итоговая процентная ставка:</label>
-                                <input type="text" class="form-control" name="annualRateIns" id="annualRateIns" placeholder="{{ annualRateIns }}" disabled>
+                                <input type="text" class="form-control" name="annualRateIns" id="annualRateIns" placeholder="{{ annualRateIns }} %" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="creditAmount">Ежемесячный платеж:</label>
-                                <input type="text" class="form-control" name="monthlyPayment" id="monthlyPayment" placeholder="{{ monthlyPayment }}" disabled>
+                                <input type="text" class="form-control" name="monthlyPayment" id="monthlyPayment" placeholder="{{ monthlyPayment }} &#8381;" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="creditAmount">Переплата:</label>
-                                <input type="text" class="form-control" name="monthlyPayment" id="monthlyPayment" placeholder="{{ overpaymentStr }}" disabled>
+                                <input type="text" class="form-control" name="monthlyPayment" id="monthlyPayment" placeholder="{{ overpaymentStr }} &#8381;" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="creditAmount">Общий процент переплаты:</label>
+                                <input type="text" class="form-control" name="overpaymentPercent" id="overpaymentPercent" placeholder="{{ overpaymentPercent }} %" disabled>
                             </div>
                         </form>
                     </div>
