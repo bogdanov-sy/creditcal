@@ -9,8 +9,8 @@ def insurance(request):
     return render(request, 'insurance/index.html', {})
 
 def monthly_payment(s, g, n):
-   i = int(g) / 100 / 12
-   P = int(s) * (i + (i / (((1 + i) ** n) - 1)))
+   i = float(g) / 100 / 12
+   P = float(s) * (i + (i / (((1 + i) ** n) - 1)))
    return (P)
 
 def numrus (x):
@@ -21,10 +21,10 @@ def numrus (x):
     return(px)
 
 def calculatecredit(request):
-    s = int(request.GET['creditAmount'])
-    ins = int(request.GET['insuranceAmount'])
-    grate = int(request.GET['annualRate'])
-    n = int(request.GET['creditTerm'])
+    s = float(request.GET['creditAmount'])
+    ins = float(request.GET['insuranceAmount'])
+    grate = float(request.GET['annualRate'])
+    n = float(request.GET['creditTerm'])
     for k in range(1, 100, 1):
         var1 = monthly_payment((int(s) + int(ins)), grate, n)
         var2 = monthly_payment(s, k, n)
