@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Расчет доходности от рефинансирования</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6" style="margin: 1rem auto 0;">
+                <div class="card">
+                	<div class="card-body">
+                        <form method="GET" action="{% url 'refinancecalc' %}">
+                            <div class="card">
+                	 			<div class="card-header">
+    									Текущий кредит:
+  								</div>
+                   				<div class="card-body">
+                            		<div class="form-group">
+                                		<label for="creditAmount1">Введите сумму текущего кредита:</label>
+                                		<input type="text" class="form-control" name="creditAmount1" id="creditAmount1">
+		                            </div>
+		                            <div class="form-group">
+		                                <label for="insuranceAmount1">Введи сумму страховки текущего кредита:</label>
+		                                <input type="text" class="form-control" name="insuranceAmount1" id="insuranceAmount1">
+		                            </div>
+		                            <div class="form-group">
+		                                <label for="annualRate1">Введите годовую ставку текущего кредита:</label>
+		                                <input type="text" class="form-control" name="annualRate1" id="annualRate1">
+		                            </div>
+		                            <div class="form-group">
+		                                <label for="creditTerm1">Введите срок кредита (в месяцах) текущего кредита:</label>
+		                                <input type="text" class="form-control" name="creditTerm1" id="creditTerm1">
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="card">
+                	 			<div class="card-header">
+    									Рефинансирование кредит:
+  								</div>
+  								<div class="card-body">
+		                            <div class="form-group">
+		                            	<label for="creditTerm3">Введите месяц,с которого будет рефинансирование:</label>
+		                                <input type="text" class="form-control" name="creditTerm3" id="creditTerm3">
+		                            </div>
+		                            <div class="form-group">
+		                                <label for="creditAmount2">Введите сумму кредита для рефинансирования:</label>
+		                                <input type="text" class="form-control" name="creditAmount2" id="creditAmount2">
+		                            </div>
+		                            <div class="form-group">
+		                                <label for="insuranceAmount2">Введи сумму страховки при рефинансировании:</label>
+		                                <input type="text" class="form-control" name="insuranceAmount2" id="insuranceAmount2">
+		                            </div>
+		                            <div class="form-group">
+		                                <label for="annualRate2">Введите годовую ставку рефинансирования:</label>
+		                                <input type="text" class="form-control" name="annualRate2" id="annualRate2">
+		                            </div>
+		                            <div class="form-group">
+		                                <label for="creditTerm2">Введите срок кредита (в месяцах) рефинансирования:</label>
+		                                <input type="text" class="form-control" name="creditTerm2" id="creditTerm2">
+		                            </div>
+		                        </div>
+		                    </div>
+                            <button type="submit" class="btn btn-primary">Рассчитать</button>
+                            <button type="reset" class="btn btn-primary">Очистить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
