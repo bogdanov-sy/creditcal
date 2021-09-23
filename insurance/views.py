@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from . import options as opt
+import sys
 
 from django.utils.datastructures import MultiValueDictKeyError
 
@@ -8,31 +9,40 @@ from django.utils.datastructures import MultiValueDictKeyError
 def insurance(request):
     return render(request, 'insurance/index.html', {})
 
-def monthly_payment(s, g, n):
-   i = float(g) / 100 / 12
-   P = float(s) * (i + (i / (((1 + i) ** n) - 1)))
-   return (P)
-
-def numrus (x):
-    z = int((float(x) % 1)*100 // 1)
-    y = float(x) // 1
-    p = '{0:,}'.format(int(y)).replace(',', ' ')
-    px = str(p) + ',' + str(z)
-    return(px)
-
 def calculatecredit(request):
-    s = float(request.GET['creditAmount'])
-    ins = float(request.GET['insuranceAmount'])
-    grate = float(request.GET['annualRate'])
-    n = float(request.GET['creditTerm'])
-    for k in range(1, 100, 1):
-        var1 = monthly_payment((int(s) + int(ins)), grate, n)
-        var2 = monthly_payment(s, k, n)
-        if var2 >= var1:
-            annualRateIns = str(k)
-            monthlyPayment = str(numrus(float("{0:.1f}".format(var1))))
-            overpayment = (monthly_payment((int(s) + int(ins)), grate, n) * n) - int(s)
-            overpaymentStr = str(numrus(float("{0:.1f}".format(overpayment))))
-            overpaymentPercent = str(int(overpayment / s * 100))
-            return render(request, 'insurance/creditcal.html', {'annualRateIns': annualRateIns, 'monthlyPayment' : monthlyPayment, 'overpaymentStr' : overpaymentStr, 'overpaymentPercent' : overpaymentPercent})
-            #return HttpResponse('Процент кредита:' + annualRateIns + 'Ежемесячный процент:' + monthlyPayment + 'Переплата:' +overpayment)
+    amount = float(request.GET['creditAmount'])
+    insurance = float(request.GET['insuranceAmount'])
+    monthly_payment = float(request.GET['monthlyPayment'])
+    annual_rate = float(request.GET['annualRate'])
+    credit_term = float(request.GET['creditTerm'])
+
+    if amount == 0:
+        if monthly_payment == 0:
+            sys.exit("Невозможно определить параметры кредита")
+        amount = (monthly_payment * credit_term) - insurance
+        print(amount)
+
+    if monthly_payment == 0:
+        monthly_payment = opt.computation_monthly_payment(float(amount + insurance), float(annual_rate), int(credit_term))
+
+    if insurance == 0:
+        monthly_payment_real = opt.computation_monthly_payment(amount, annual_rate, credit_term)
+        i = float(annual_rate) / 100 / 12
+        insurance = (monthly_payment - monthly_payment_real) / (i + (i / (((1 + i) ** credit_term) - 1)))
+
+    real_rate = opt.selection_annual_rate(amount, credit_term, monthly_payment)
+    s_real = monthly_payment * credit_term
+    overpaiment = str(s_real - amount)
+    overpaymentPercent = str((float(overpaiment) / float(amount)) * 100)
+
+    real_rateStr = str(opt.numrus(float("{0:.1f}".format(float(real_rate)))))
+    insStr = str(opt.numrus(float("{0:.1f}".format(float(insurance)))))
+    monthly_paymentStr = str(opt.numrus(float("{0:.1f}".format(float(monthly_payment)))))
+    overpaimentStr = str(opt.numrus(float("{0:.1f}".format(float(overpaiment)))))
+    overpaymentPercentStr = str(opt.numrus(float("{0:.1f}".format(float(overpaymentPercent)))))
+
+    print("Реальный процент: " + str(real_rateStr))
+    print("Страховка: " + str(insStr))
+    print("Общая сумма переплаты: " + str(overpaimentStr))
+
+    return render(request, 'insurance/creditcal.html', {'annualRateIns': real_rateStr, 'monthlyPayment' : monthly_paymentStr, 'overpaymentStr' : overpaimentStr, 'overpaymentPercent' : overpaymentPercentStr, 'insuranceStr' : insStr})
