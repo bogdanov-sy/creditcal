@@ -56,7 +56,7 @@ def calculatecredit(amount, insurance, monthly_payment, annual_rate, credit_term
                        'overpaymentPercent': overpaymentPercentStr, 'insuranceStr': insStr}
 
     else:
-        context = {'Не хватает данных'}
+        context = None
 
     return context
 
