@@ -9,12 +9,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <title>Кредитный калькулятор</title>
+    <style>
+        .error {
+	        color:red;
+	        font-size: 120%;
+	        margin-bottom:30px;
+	    }
+</style>
   </head>
   <body>
     <div class="container-fluid">
-        <div>{{ error }}</div>
         <div class="row">
             <div class="col-md-6" style="margin: 1rem auto 0;">
+                <div class="card error">{{ error }}</div>
                 <div class="card">
                     <div class="card-body">
                         <form method="GET" action="{% url 'calculatecredit' %}">

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from options import calculatecredit
+from insurance.options import calculatecredit
 
 from django.utils.datastructures import MultiValueDictKeyError
 
