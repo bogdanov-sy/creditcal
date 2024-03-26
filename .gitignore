@@ -1,3 +1,9 @@
 .DS_Store
 .idea
 .env
+creditcal/insurance/__pycache__
+creditcal/main/migrations/__pycache__
+creditcal/refinance/__pycache__
+creditcal/webcreditcal/__pycache__
+creditcal/main/__pycache__
+creditcal/refinance/migrations/__pycache__
