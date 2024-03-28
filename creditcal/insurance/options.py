@@ -52,8 +52,8 @@ def calculatecredit(amount, insurance, monthly_payment, annual_rate, credit_term
         overpaymentPercentStr = str(numrus(float("{0:.1f}".format(float(overpaymentPercent)))))
 
         context = {'annualRateIns': real_rateStr, 'monthlyPayment': monthly_paymentStr,
-                       'overpaymentStr': overpaimentStr,
-                       'overpaymentPercent': overpaymentPercentStr, 'insuranceStr': insStr}
+                        'overpaymentStr': overpaimentStr,
+                        'overpaymentPercent': overpaymentPercentStr, 'insuranceStr': insStr}
 
     else:
         context = None
