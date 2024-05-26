@@ -1,4 +1,4 @@
-from options import calculate_payment_breakdown
+from options import calculate_payment_breakdown, numrus, calculate_annuity_payment
 
 
 
@@ -11,6 +11,9 @@ def main():
     print(breakdown_df)
     breakdown_df.to_csv("loan_payment_breakdown.csv", index=False)
     print("\nДанные сохранены в 'loan_payment_breakdown.csv'")
-
+    monthly_payment = calculate_annuity_payment(principal, annual_rate, months)
+    print(numrus(monthly_payment))
+    total = monthly_payment * months
+    print(numrus(total))
 if __name__ == "__main__":
     main()

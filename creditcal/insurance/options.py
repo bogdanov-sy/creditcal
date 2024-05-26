@@ -2,13 +2,6 @@ import numpy as np
 import pandas as pd
 import scipy.optimize as optimize
 
-amount = 0
-insurance = 0
-monthly_payment = 0
-annual_rate = 0
-credit_term = 0
-
-
 def numrus (number):
     integer = int((float(number) % 1) * 100 // 1)
     fractional_part = float(number) // 1
