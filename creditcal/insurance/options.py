@@ -59,10 +59,10 @@ def calculate_payment_breakdown(principal, annual_rate, months):
         balance -= principal_payment
 
         data["Month"].append(month)
-        data["Principal Payment"].append(principal_payment)
-        data["Interest Payment"].append(interest_payment)
-        data["Total Payment"].append(monthly_payment)
-        data["Remaining Balance"].append(balance)
+        data["Principal Payment"].append(numrus(principal_payment))
+        data["Interest Payment"].append(numrus(interest_payment))
+        data["Total Payment"].append(numrus(monthly_payment))
+        data["Remaining Balance"].append(numrus(balance))
 
     df = pd.DataFrame(data)
     return df
@@ -87,29 +87,3 @@ def calculate_interest_rate(principal, monthly_payment, months):
     annual_rate = monthly_rate * 12
     return annual_rate
         
-
-
-def calculatecredit(amount, insurance, monthly_payment, annual_rate, credit_term):
-    if amount != 0 and  monthly_payment != 0 and annual_rate != 0 and credit_term != 0:
-
-        real_rate = selection_annual_rate(amount, credit_term, monthly_payment)
-        s_real = monthly_payment * credit_term
-        overpaiment = str(s_real - amount)
-        overpaymentPercent = str((float(overpaiment) / float(amount)) * 100)
-
-        real_rateStr = str(numrus(float("{0:.1f}".format(float(real_rate)))))
-        insStr = str(numrus(float("{0:.1f}".format(float(insurance)))))
-        monthly_paymentStr = str(numrus(float("{0:.1f}".format(float(monthly_payment)))))
-        overpaimentStr = str(numrus(float("{0:.1f}".format(float(overpaiment)))))
-        overpaymentPercentStr = str(numrus(float("{0:.1f}".format(float(overpaymentPercent)))))
-
-        context = {'annualRateIns': real_rateStr, 'monthlyPayment': monthly_paymentStr,
-                        'overpaymentStr': overpaimentStr,
-                        'overpaymentPercent': overpaymentPercentStr, 'insuranceStr': insStr}
-
-    else:
-        context = None
-
-    return context
-
-
