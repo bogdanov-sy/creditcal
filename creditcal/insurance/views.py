@@ -1,7 +1,5 @@
 from django.shortcuts import render
-from insurance.options import calculatecredit
-
-from django.utils.datastructures import MultiValueDictKeyError
+from insurance.options import calculate_payment_breakdown
 
 
 # Create your views here.
@@ -15,7 +13,7 @@ def calculate(request):
     annual_rate = float(request.GET['annualRate'])
     credit_term = float(request.GET['creditTerm'])
 
-    context = calculatecredit(amount, insurance, monthly_payment, annual_rate, credit_term)
+    context = {}
 
     if context is None:
         return render(request, 'insurance/index.html', {'error': 'Не указаны сумму и ежемесячный платеж'})

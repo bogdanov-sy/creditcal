@@ -9,7 +9,7 @@ def main():
 
     breakdown_df = calculate_payment_breakdown(principal, annual_rate, months)
     print(breakdown_df)
-    breakdown_df.to_csv("loan_payment_breakdown.csv", index=False)
+    breakdown_df.to_csv("../static/loan_payment_breakdown.csv", index=False)
     print("\nДанные сохранены в 'loan_payment_breakdown.csv'")
     monthly_payment = calculate_annuity_payment(principal, annual_rate, months)
     print(numrus(monthly_payment))
