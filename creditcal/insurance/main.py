@@ -1,5 +1,9 @@
+import os
 from options import calculate_payment_breakdown, numrus, calculate_annuity_payment
+from django.conf import settings
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "webcreditcal.settings")
+STATIC = settings.STATIC_ROOT
 
 
 def main():
@@ -9,7 +13,7 @@ def main():
 
     breakdown_df = calculate_payment_breakdown(principal, annual_rate, months)
     print(breakdown_df)
-    breakdown_df.to_csv("../static/loan_payment_breakdown.csv", index=False)
+    breakdown_df.to_csv(STATIC + 'loan_payment_breakdown.csv', index=False)
     print("\nДанные сохранены в 'loan_payment_breakdown.csv'")
     monthly_payment = calculate_annuity_payment(principal, annual_rate, months)
     print(numrus(monthly_payment))
