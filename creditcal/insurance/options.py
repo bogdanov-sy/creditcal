@@ -80,3 +80,29 @@ def calculate_interest_rate(principal, monthly_payment, months):
     annual_rate = monthly_rate * 12
     return annual_rate
         
+def calculatecredit(amount, insurance, monthly_payment, annual_rate, months):
+    if amount != 0 and annual_rate != 0 and months != 0:
+        
+        monthly_payment = calculate_annuity_payment(amount, annual_rate / 100, months)
+        print(monthly_payment)
+
+        real_rate = calculate_interest_rate(amount, monthly_payment, months)
+
+        s_real = monthly_payment * months
+        overpaiment = str(s_real - amount)
+        overpaymentPercent = str((float(overpaiment) / float(amount)) * 100)
+
+        real_rateStr = str(numrus(float("{0:.1f}".format(float(real_rate)))))
+        insStr = str(numrus(float("{0:.1f}".format(float(insurance)))))
+        monthly_paymentStr = str(numrus(float("{0:.1f}".format(float(monthly_payment)))))
+        overpaimentStr = str(numrus(float("{0:.1f}".format(float(overpaiment)))))
+        overpaymentPercentStr = str(numrus(float("{0:.1f}".format(float(overpaymentPercent)))))
+
+        context = {'annualRateIns': real_rateStr, 'monthlyPayment': monthly_paymentStr,
+                       'overpaymentStr': overpaimentStr,
+                       'overpaymentPercent': overpaymentPercentStr, 'insuranceStr': insStr}
+
+    else:
+        context = None
+
+    return context
