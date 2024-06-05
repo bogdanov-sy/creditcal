@@ -1,9 +1,11 @@
-FROM python:3.6
+FROM python:3.9.19-slim
 
-WORKDIR /usr/src/app
+WORKDIR /app
 COPY requirements.txt ./
-RUN pip install -r requirements.txt
-COPY . /usr/src/app
-
 EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+RUN pip install -r requirements.txt
+
+RUN adduser --disabled-password service-user
+
+USER service-user

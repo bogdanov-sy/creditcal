@@ -1,0 +1,11 @@
+services:
+  creditcal:
+    build:
+      context: .
+    ports:
+      - 9000:8000
+    volumes:
+      - ./creditcal:/app
+
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
