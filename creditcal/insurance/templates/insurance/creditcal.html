@@ -41,11 +41,11 @@
                                 <input type="text" class="form-control" name="overpaymentPercent" id="overpaymentPercent" placeholder="{{ overpaymentPercent }} %" disabled>
                             </div>
                         </form>
-                        <button class="btn btn-primary">
-                            <a href="{% url 'insurance' %}">Click here</a>
+                        <button class="btn">
+                            <a href="{% url 'insurance' %}">Назад</a>
                         </button>
                         <form method="get" action="{% url 'download_file' 'loan_payment_breakdown.csv' %}">
-                            <button type="submit">loan_payment_breakdown.csv</button>
+                            <button type="submit">Скачать csv файл</button>
                         </form>
                     </div>
                 </div>
