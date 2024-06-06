@@ -2,10 +2,11 @@ FROM python:3.9.19-slim
 
 WORKDIR /app
 COPY requirements.txt ./
+COPY ./creditcal ./
 EXPOSE 8000
 
 RUN pip install -r requirements.txt
 
-RUN adduser --disabled-password service-user
+# RUN adduser --disabled-password service-user
 
-USER service-user
+# USER service-user
